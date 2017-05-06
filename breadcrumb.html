@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>写一个面包屑导航用angular自定义指令</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body ng-app="myApp" ng-controller="DemoController">
+<breadcrumb data="{{pathData}}"></breadcrumb>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var myApp = angular.module("myApp",[]);
+    myApp.controller("DemoController",["$scope",function($scope){
+
+        $scope.pathData = {
+            home:"#",
+            school:"#",
+            workplace:"#",
+            canteen:"#"
+        };
+    }]);
+    myApp.directive("breadcrumb",[function(){
+        //返回指令对象
+        return{
+           scope:{},
+            templateUrl:"-breadcrumb.html",
+            replace:true,
+            link:function(scope,element,attributes){
+               scope.data = JSON.parse(attributes.data);
+           }
+        };
+       }]);
+
+
+</script>
+</body>
+</html>
